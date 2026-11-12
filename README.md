@@ -29,7 +29,7 @@
 | 13 | Net/Infra | Traceroute + Banners + HTTP Methods + WAF |
 | 14 | BruteForce | Credenciales SSH/FTP/HTTP/Telnet |
 | 15 | Terminal SSH | Conexión SSH interactiva |
-
+| 16 | Stripe Auth | Checker de tarjetas vía EzyCourse (Auth) |
 ---
 
 ## 📦 Instalación
