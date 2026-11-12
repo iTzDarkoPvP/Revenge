@@ -1,12 +1,16 @@
-#    🩸 REVENGE KIT v1.0
+<div align="center">
 
-<p align="center">
-  <b>Suite de reconocimiento, análisis de red y verificación de cuentas.</b><br>
-  15 herramientas · Menú interactivo · Termux / Linux / macOS<br><br>
-  <img src="https://img.shields.io/badge/python-3.8+-blue?logo=python&style=flat-square"/>
-  <img src="https://img.shields.io/badge/author-DarkoDev-red?style=flat-square"/>
-  <img src="https://img.shields.io/badge/platform-Termux%20%7C%20Linux%20%7C%20macOS-lightgrey?style=flat-square"/>
-</p>
+# 🩸 REVENGE KIT v1.0
+
+**Suite de reconocimiento, análisis de red y verificación de cuentas.**
+
+16 herramientas · Menú interactivo · Termux / Linux / macOS
+
+<img src="https://img.shields.io/badge/python-3.8+-blue?logo=python&style=flat-square"/>
+<img src="https://img.shields.io/badge/author-DarkoDev-red?style=flat-square"/>
+<img src="https://img.shields.io/badge/platform-Termux%20%7C%20Linux%20%7C%20macOS-lightgrey?style=flat-square"/>
+
+</div>
 
 ---
 
