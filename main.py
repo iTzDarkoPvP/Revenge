@@ -52,6 +52,7 @@ TOOLS = {
     "13": {"name": "Net/Infra", "file": "net_infra.py", "desc": "Traceroute+Banners+HTTP+WAF"},
     "14": {"name": "BruteForce", "file": "bruteforce.py", "desc": "Credenciales SSH/FTP/HTTP"},
     "15": {"name": "Terminal SSH", "file": "terminal.py", "desc": "Conexión SSH interactiva"},
+    "16": {"name": "Stripe Auth", "file": "stripe_chk.py", "desc": "Checker EzyCourse (Auth)"},
 }
 
 def check_tool_exists(filename):
