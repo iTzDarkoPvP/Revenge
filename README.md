@@ -35,7 +35,7 @@
 ## 📦 Instalación
 
 ```bash
-git clone https://github.com/DarkoDev/RevengeKIT.git
+git clone https://github.com/iTzDarkoPvP/RevengeKIT.git
 cd RevengeKIT
 chmod +x install.sh && ./install.sh
 ```
