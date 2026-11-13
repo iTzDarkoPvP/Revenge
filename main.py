@@ -55,6 +55,9 @@ TOOLS = {
     "16": {"name": "Stripe Auth", "file": "stripe_chk.py", "desc": "Checker EzyCourse (Auth)"},
     "18": {"name": "Ping Tool", "file": "ping_tool.py", "desc": "Ping profesional con TTL"},
     "19": {"name": "MC Query", "file": "mc_query.py", "desc": "Info de servidores Minecraft"},
+    "20": {"name": "Roblox Lookup", "file": "roblox_lookup.py", "desc": "Info de usuarios Roblox"},
+    "21": {"name": "Social Lookup", "file": "social_lookup.py", "desc": "TikTok + Instagram"},
+    "22": {"name": "Phone Lookup", "file": "phone_lookup.py", "desc": "Info de numeros"},
 }
 
 def check_tool_exists(filename):
