@@ -53,6 +53,7 @@ TOOLS = {
     "14": {"name": "BruteForce", "file": "bruteforce.py", "desc": "Credenciales SSH/FTP/HTTP"},
     "15": {"name": "Terminal SSH", "file": "terminal.py", "desc": "Conexión SSH interactiva"},
     "16": {"name": "Stripe Auth", "file": "stripe_chk.py", "desc": "Checker EzyCourse (Auth)"},
+    "18": {"name": "Ping Tool", "file": "ping_tool.py", "desc": "Ping profesional con TTL"},
 }
 
 def check_tool_exists(filename):
