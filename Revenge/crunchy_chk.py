@@ -46,10 +46,8 @@ def _load_proxy_file(path):
     return proxies
 
 def draw_banner():
-    ancho = console.width if console.width else 80
-    ancho_panel = ancho if ancho < 80 else 80
     banner_texto = (
-        "\n[bold #ff6600]██████╗██████╗ ██╗   ██╗███╗   ██╗ ██████╗██╗  ██╗██╗   ██╗[/bold #ff6600]\n"
+        "\n[bold #ff6600] ██████╗██████╗ ██╗   ██╗███╗   ██╗ ██████╗██╗  ██╗██╗   ██╗[/bold #ff6600]\n"
         "[bold #ff6600]██╔════╝██╔══██╗██║   ██║████╗  ██║██╔════╝██║  ██║╚██╗ ██╔╝[/bold #ff6600]\n"
         "[bold #ffaa00]██║     ██████╔╝██║   ██║██╔██╗ ██║██║     ███████║ ╚████╔╝ [/bold #ffaa00]\n"
         "[bold white]██║     ██╔══██╗██║   ██║██║╚██╗██║██║     ██╔══██║  ╚██╔╝  [/bold white]\n"
@@ -57,7 +55,7 @@ def draw_banner():
         "[bold #ff6600] ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   [/bold #ff6600]\n"
         "[dim white]          Crunchyroll Checker By DarkoDevv v1.0[/dim white]"
     )
-    console.print(Align.center(Panel(Align.center(banner_texto), border_style="#ff6600", box=box.ROUNDED, width=ancho_panel)))
+    console.print(Align.center(Panel(Align.center(banner_texto), border_style="#ff6600", box=box.ROUNDED, width=74)))
 
 def print_result(res, pos=""):
     st = res.get("status")
@@ -171,12 +169,20 @@ async def run_single(cfg):
 async def run_bulk(cfg):
     _clear()
     draw_banner()
-    print("\n\033[1;38;5;208mArchivo de combos:\033[0m ", end="", flush=True)
-    path = sys.stdin.readline().strip() or "accounts.txt"
+    print("\n\033[1;38;5;208mCombos (Enter = accounts.txt):\033[0m ", end="", flush=True)
+    path_input = sys.stdin.readline().strip() or "accounts.txt"
+    
+    path = os.path.expanduser(os.path.expandvars(path_input))
+    
+    if not os.path.exists(path):
+        alt_path = os.path.join(_BASE_DIR, path_input)
+        if os.path.exists(alt_path):
+            path = alt_path
+    
     print()
     
     if not os.path.exists(path):
-        print("\033[1;31mArchivo no encontrado.\033[0m"); time.sleep(2); return
+        print(f"\033[1;31mArchivo no encontrado: {path}\033[0m"); time.sleep(2); return
     
     processed = set()
     if os.path.exists(_PROGRESS_PATH):

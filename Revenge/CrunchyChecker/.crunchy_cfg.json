@@ -1,0 +1,5 @@
+{
+  "delay": 15.0,
+  "proxy_mode": "list",
+  "proxy_list": "~/storage/shared/proxies.txt"
+}
